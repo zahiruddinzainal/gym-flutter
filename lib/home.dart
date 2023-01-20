@@ -10,11 +10,13 @@ import 'package:gym/query.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timetable_view/timetable_view.dart';
 import 'dart:convert' as convert;
+import 'constant.dart' as Constants;
 
 import 'package:http/http.dart' as http;
 
 Future<List<Booking>> fetchBookings() async {
-  var response = await http.get(Uri.http('gym.test', '/api/gym'));
+  var response =
+      await http.get(Uri.http(Constants.LARAVEL_ENDPOINT_URL, '/api/gym'));
   return (json.decode(response.body) as List)
       .map((e) => Booking.fromJson(e))
       .toList();

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gym/home.dart';
 import 'dart:convert' as convert;
+import 'constant.dart' as Constants;
 
 import 'package:http/http.dart' as http;
 
@@ -78,8 +79,8 @@ class _BookGymState extends State<BookGym> {
   }
 
   BookGym(gym, name, date, time) async {
-    var response = await http.get(
-        Uri.http('gym.test', '/api/gym/$gym/name/$name/date/$date/time/$time'));
+    var response = await http.get(Uri.http(Constants.LARAVEL_ENDPOINT_URL,
+        '/api/gym/$gym/name/$name/date/$date/time/$time'));
     print(response.body);
     if (response.body == "200") {
       showModalBottomSheet<void>(

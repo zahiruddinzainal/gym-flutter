@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:gym/models/booking.dart';
 import 'package:timetable_view/timetable_view.dart';
 import 'dart:convert' as convert;
+import 'constant.dart' as Constants;
 
 import 'package:http/http.dart' as http;
 
 Future<List<Booking>> fetchBookings(date) async {
-  var response = await http.get(Uri.http('gym.test', '/api/gym/$date'));
+  var response = await http
+      .get(Uri.http(Constants.LARAVEL_ENDPOINT_URL, '/api/gym/$date'));
   return (json.decode(response.body) as List)
       .map((e) => Booking.fromJson(e))
       .toList();
